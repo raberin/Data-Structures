@@ -3,10 +3,12 @@ Answer the following questions for each of the data structures you implemented a
 ## Queue
 
 1. What is the runtime complexity of `enqueue`?
+    O(1) since you're appending at the end
 
 2. What is the runtime complexity of `dequeue`?
-
+    O(1) in DLL's due to the nature of the data stucture. Remove the head, change pointers.
 3. What is the runtime complexity of `len`?
+    Depends entirely on how it's implemented. If it's not saved on constructor, it would be O(n). If it IS saved it's O(1)
 
 ## Binary Search Tree
 
