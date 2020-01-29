@@ -56,3 +56,5 @@ Answer the following questions for each of the data structures you implemented a
     O(1) since we're not shifting any values. Just chaning pointers?
 
     a. Compare the runtime of the doubly linked list's `delete` method with the worst-case runtime of the JS `Array.splice` method. Which method generally performs better?
+
+    Any Linked List Delete will beat Array.splice due to the fact that LL's dont need to shift values during a deletion. A linked list just needs to change pointers to skip the node, while in an array it must be removed and every value after must be shift over to the left. 

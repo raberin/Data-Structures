@@ -171,3 +171,27 @@ class DoublyLinkedList:
 
     def __repr__(self):
         return f"head = {self.head.value}"
+
+
+dll = DoublyLinkedList()
+dll.add_to_tail(1)
+dll.add_to_tail(2)
+dll.add_to_tail(3)
+dll.add_to_tail(4)
+
+
+def middle(ll):
+    # Initialize slow and fast
+    slow = ll.head
+    fast = ll.head
+    # Set fast 2 nodes ahead
+    while fast:
+        # Increment Slow 1x
+        slow = slow.next
+        # Increment Fast 2x
+        fast = fast.next.next
+    return slow.value
+
+
+print(middle(dll))
+# print(dll.next)
