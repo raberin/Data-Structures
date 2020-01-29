@@ -30,7 +30,7 @@ class LRUCache:
             return None
         else:
             # Move the node that we're retrieving to tail
-            value = self.cache[key].value
+            value = self.cache[key].value[1]
             self.dll.move_to_end(self.cache[key])
             return value
 
@@ -49,17 +49,23 @@ class LRUCache:
         # If size == limit remove from head and decrement
         if self.size == self.limit and key not in self.cache:
             head = self.dll.head
-            head.value = None
+            to_be_deleted_key = head.value[0]
+            # Delete Head from DLL
             self.dll.delete(head)
+            # Delete Key:value pair from cache
+            del self.cache[to_be_deleted_key]
+            # decrement
             self.size -= 1
         # if key already exists in cache, overwrite the value and move to tail
         if key in self.cache:
             # Overwrite the value of that node
-            self.cache[key].value = value
+            self.cache[key].value = (key, value)
             # Move node to tail
             self.dll.move_to_end(self.cache[key])
         else:
             # Set a key in cache, set value to be added to tail in DLL
-            self.dll.add_to_tail(value)
+            # Create a tuple for value so it stores key AND value
+            my_node_value = (key, value)
+            self.dll.add_to_tail(my_node_value)
             self.cache[key] = self.dll.tail
             self.size += 1
