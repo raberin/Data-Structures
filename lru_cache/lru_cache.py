@@ -25,7 +25,14 @@ class LRUCache:
     """
 
     def get(self, key):
-        pass
+        # If there's no value return None
+        if key not in self.cache:
+            return None
+        else:
+            # Move the node that we're retrieving to tail
+            value = self.cache[key].value
+            self.dll.move_to_end(self.cache[key])
+            return value
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -40,8 +47,10 @@ class LRUCache:
 
     def set(self, key, value):
         # If size == limit remove from head and decrement
-        if self.size == self.limit:
-            self.dll.remove_from_tail()
+        if self.size == self.limit and key not in self.cache:
+            head = self.dll.head
+            head.value = None
+            self.dll.delete(head)
             self.size -= 1
         # if key already exists in cache, overwrite the value and move to tail
         if key in self.cache:
