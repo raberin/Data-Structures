@@ -13,9 +13,7 @@ class ListNode:
     have a next node it is point to."""
 
     def insert_after(self, value):
-        # Create variable for the next node
         current_next = self.next
-        # Create a node
         self.next = ListNode(value, self, current_next)
         if current_next:
             current_next.prev = self.next
@@ -77,10 +75,8 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_head(self):
-        # Save head value
         value = self.head.value
-        # Delete head
-        self.delete(self.head)
+        self.delete(self.tail)
         return value
 
     """Wraps the given value in a ListNode and inserts it 
@@ -98,7 +94,6 @@ class DoublyLinkedList:
             self.tail = new_node
         # set next to self.head()
         else:
-            # Setting prev, next vars to new node since they're current None
             new_node.prev = self.tail
             self.tail.next = new_node
             self.tail = new_node
@@ -132,22 +127,22 @@ class DoublyLinkedList:
     the node was the head or the tail"""
 
     def delete(self, node):
+        self.length -= 1
         # if LL is empty
         if not self.head and not self.tail:
             # TODO: Error handling
             return
-        self.length -= 1
-        # If head and tail// one thing on list
-        if self.head == self.tail:
+        # If head and tail
+        if self. head == self.tail:
             self.head = None
             self.tail = None
-        # If delete head...
+        # If head
         elif self.head == node:
-            self.head = node.next
+            self.head = self.head.next
             node.delete()
-        # if deleting tail
+        # if tail
         elif self.tail == node:
-            self.tail = node.prev
+            self.tail = self.tail.prev
             node.delete()
         else:
             node.delete()
